@@ -12,7 +12,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Header */
 .admin-header {
   background: #417690;
   padding: 10px 24px;
@@ -38,7 +37,6 @@ h1 {
   padding: 20px 24px;
 }
 
-/* Boxes */
 .card {
   border: none;
   margin-bottom: 24px;
@@ -65,7 +63,6 @@ h1 {
   font-size: 13px;
 }
 
-/* Tables */
 .table {
   font-size: 13px;
   margin: 0;
@@ -88,7 +85,6 @@ tbody tr:has(input:checked) td {
   background: #ffc;
 }
 
-/* Forms */
 .form-label.required {
   font-weight: bold;
 }
@@ -99,7 +95,6 @@ tbody tr:has(input:checked) td {
   font-size: 13px;
 }
 
-/* Buttons */
 .btn {
   border: none;
   font-size: 13px;
@@ -120,7 +115,6 @@ tbody tr:has(input:checked) td {
   background: #ba2121;
 }
 
-/* Remove shadows */
 .toast,
 .btn:focus,
 .form-control:focus,
@@ -128,7 +122,6 @@ tbody tr:has(input:checked) td {
   box-shadow: none;
 }
 
-/* Messages */
 .toast {
   border: none;
 }

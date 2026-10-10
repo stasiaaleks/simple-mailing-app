@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mailing List Administration</title>
+  <title>Send email · Mailing List Administration</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <nav class="navbar navbar-expand-md navbar-dark admin-header">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#send-page">Mailing List administration</a>
+      <a class="navbar-brand" href="/">Mailing List administration</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="#send-page">Send email</a>
+            <a class="nav-link active" href="/">Send email</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#manage-page">Contacts</a>
+            <a class="nav-link" href="/contacts.html">Contacts</a>
           </li>
         </ul>
       </div>
@@ -28,163 +28,67 @@
   </nav>
 
   <main class="container-fluid admin-content">
-    <!-- Send Email Page -->
-    <section id="send-page" class="page">
-      <h1>Send email</h1>
+    <h1>Send email</h1>
 
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="card">
-            <div class="card-header">
-              <h2>Recipients</h2>
-            </div>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="col-check"><input type="checkbox" id="select-all"></th>
-                    <th data-sort="surname">Surname</th>
-                    <th data-sort="firstName">First name</th>
-                    <th data-sort="patronymic">Patronymic</th>
-                    <th data-sort="email">Email</th>
-                  </tr>
-                </thead>
-                <tbody id="contacts-table">
-                  <tr><td colspan="5" class="text-muted">Loading...</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="card-footer">
-              <span id="selected-count">0</span> selected
-            </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <h2>Recipients</h2>
           </div>
-        </div>
-
-        <div class="col-lg-4">
-          <form id="email-form" class="card">
-            <div class="card-header">
-              <h2>Message</h2>
-            </div>
-            <div class="card-body">
-              <div class="mb-3">
-                <label class="form-label">Template</label>
-                <select name="template" class="form-select">
-                  <option value="">Select a template...</option>
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label required">Subject</label>
-                <input type="text" name="subject" class="form-control">
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label required">Message body</label>
-                <textarea name="body" class="form-control" rows="8"></textarea>
-                <div class="form-text">HTML is supported.</div>
-              </div>
-
-              <button type="submit" class="btn btn-primary">Send email</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- Manage Contacts Page -->
-    <section id="manage-page" class="page" hidden>
-      <h1>Contacts</h1>
-
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="card">
-            <div class="card-header">
-              <h2>All contacts</h2>
-            </div>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Full name</th>
-                    <th>Email</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="contacts-list">
-                  <tr><td colspan="3" class="text-muted">Loading...</td></tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-check"><input type="checkbox" id="select-all"></th>
+                  <th data-sort="surname">Surname</th>
+                  <th data-sort="firstName">First name</th>
+                  <th data-sort="patronymic">Patronymic</th>
+                  <th data-sort="email">Email</th>
+                </tr>
+              </thead>
+              <tbody id="contacts-table">
+                <tr><td colspan="5" class="text-muted">Loading...</td></tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="card">
-            <div class="card-header">
-              <h2>Add contact</h2>
-            </div>
-            <div class="card-body">
-              <form id="add-contact-form">
-                <div class="mb-3">
-                  <label class="form-label required">Surname</label>
-                  <input type="text" class="form-control" name="surname" required>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label required">First name</label>
-                  <input type="text" class="form-control" name="firstName" required>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Patronymic</label>
-                  <input type="text" class="form-control" name="patronymic">
-                </div>
-                <div class="mb-3">
-                  <label class="form-label required">Email</label>
-                  <input type="email" class="form-control" name="email" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Save</button>
-              </form>
-            </div>
+          <div class="card-footer">
+            <span id="selected-count">0</span> selected
           </div>
         </div>
       </div>
-    </section>
-  </main>
 
-  <!-- Modal for editing contact -->
-  <div class="modal" id="edit-modal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title">Change contact</h2>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="edit-contact-form">
-            <input type="hidden" name="id">
+      <div class="col-lg-4">
+        <form id="email-form" class="card">
+          <div class="card-header">
+            <h2>Message</h2>
+          </div>
+          <div class="card-body">
             <div class="mb-3">
-              <label class="form-label required">Surname</label>
-              <input type="text" class="form-control" name="surname" required>
+              <label class="form-label">Template</label>
+              <select name="template" class="form-select">
+                <option value="">Select a template...</option>
+              </select>
             </div>
+
             <div class="mb-3">
-              <label class="form-label required">First name</label>
-              <input type="text" class="form-control" name="firstName" required>
+              <label class="form-label required">Subject</label>
+              <input type="text" name="subject" class="form-control">
             </div>
+
             <div class="mb-3">
-              <label class="form-label">Patronymic</label>
-              <input type="text" class="form-control" name="patronymic">
+              <label class="form-label required">Message body</label>
+              <textarea name="body" class="form-control" rows="8"></textarea>
+              <div class="form-text">HTML is supported.</div>
             </div>
-            <div class="mb-3">
-              <label class="form-label required">Email</label>
-              <input type="email" class="form-control" name="email" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>
-        </div>
+
+            <button type="submit" class="btn btn-primary">Send email</button>
+          </div>
+        </form>
       </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Toast notification -->
   <div class="toast-container position-fixed top-0 end-0 p-3">
     <div id="toast" class="toast" role="alert">
       <div class="toast-header">
@@ -198,7 +102,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/constants.js"></script>
   <script src="/js/api.js"></script>
-  <script src="/js/views.js"></script>
-  <script src="/js/app.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/send.js"></script>
 </body>
 </html>

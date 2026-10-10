@@ -1,8 +1,3 @@
-/**
- * RouteRegistrar - Eliminates boilerplate in route registration
- * Usage: registrar.register('GET', '/path', controller.method)
- */
-
 class RouteRegistrar {
   constructor(router, middleware = []) {
     this.router = router;

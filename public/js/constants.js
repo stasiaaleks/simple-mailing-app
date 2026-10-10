@@ -1,5 +1,3 @@
-// Frontend API constants
-
 const API_ENDPOINTS = {
   CONTACTS: {
     LIST: '/api/contacts',

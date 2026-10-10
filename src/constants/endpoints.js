@@ -1,5 +1,3 @@
-// API endpoint paths
-
 const API_ENDPOINTS = {
   CONTACTS: {
     LIST: '/contacts',

@@ -1,5 +1,3 @@
-// API Client for communicating with the backend
-
 class ApiClient {
   async request(method, endpoint, data = null) {
     const options = {
@@ -28,7 +26,6 @@ class ApiClient {
     }
   }
 
-  // Contacts
   async getContacts() {
     return await this.request('GET', API_ENDPOINTS.CONTACTS.LIST);
   }
@@ -59,12 +56,10 @@ class ApiClient {
     return await this.request('DELETE', API_ENDPOINTS.CONTACTS.DELETE(id));
   }
 
-  // Templates
   async getTemplates() {
     return await this.request('GET', API_ENDPOINTS.TEMPLATES.LIST);
   }
 
-  // Email
   async sendEmail(subject, body, recipientIds) {
     return await this.request('POST', API_ENDPOINTS.EMAIL.SEND, {
       subject,

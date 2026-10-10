@@ -10,26 +10,20 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express();
 const PORT = CONFIG.PORT;
 
-// Middleware
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Routes
 app.use('/api', apiRoutes);
 
-// Serve index.html for all non-API routes (SPA)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// 404 for undefined routes
 app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
 
-// Error handling
 app.use(errorHandler);
 
-// Start server
 const start = async () => {
   try {
     await connectDB();
