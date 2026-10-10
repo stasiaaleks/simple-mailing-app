@@ -1,0 +1,24 @@
+{
+  "name": "mailing-list-app",
+  "version": "1.0.0",
+  "description": "Node.js mailing list application with MongoDB and Express",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "keywords": [
+    "mailing",
+    "express",
+    "mongodb",
+    "nodemailer"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.0.0",
+    "nodemailer": "^10.1.0"
+  }
+}
