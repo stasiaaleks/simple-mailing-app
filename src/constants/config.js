@@ -6,7 +6,7 @@ const CONFIG = {
   NODE_ENV: process.env.NODE_ENV || 'development',
 
   // Database
-  MONGODB_URI: process.env.MONGODB_URI || 'mongodb://admin:password@localhost:27017/mailing_app?authSource=admin',
+  MONGODB_URI: process.env.MONGODB_URI,
   COLLECTIONS: {
     CONTACTS: 'contacts',
     TEMPLATES: 'templates'
