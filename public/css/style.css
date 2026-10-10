@@ -1,0 +1,144 @@
+body {
+  background: #fff;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: normal;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Header */
+.admin-header {
+  background: #417690;
+  padding: 10px 24px;
+}
+
+.admin-header .navbar-brand {
+  color: #ffc;
+  font-size: 24px;
+}
+
+.admin-header .nav-link {
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.admin-header .nav-link.active {
+  color: #ffc;
+  text-decoration: underline;
+}
+
+.admin-content {
+  padding: 20px 24px;
+}
+
+/* Boxes */
+.card {
+  border: none;
+  margin-bottom: 24px;
+}
+
+.card-header,
+.modal-header {
+  background: #79aec8;
+  color: #fff;
+  padding: 8px 10px;
+}
+
+.card-header h2,
+.modal-header h2 {
+  font-size: 13px;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.card-footer {
+  background: #f8f8f8;
+  color: #666;
+  font-size: 13px;
+}
+
+/* Tables */
+.table {
+  font-size: 13px;
+  margin: 0;
+}
+
+.table th {
+  background: #f8f8f8;
+  color: #666;
+  font-size: 11px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.table th[data-sort] {
+  cursor: pointer;
+}
+
+/* Selected recipient rows */
+tbody tr:has(input:checked) td {
+  background: #ffc;
+}
+
+/* Forms */
+.form-label.required {
+  font-weight: bold;
+}
+
+.form-control,
+.form-select {
+  border: 1px solid #ccc;
+  font-size: 13px;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  font-size: 13px;
+}
+
+.btn-primary,
+.btn-primary:hover {
+  background: #417690;
+}
+
+.btn-secondary,
+.btn-secondary:hover {
+  background: #79aec8;
+}
+
+.btn-danger,
+.btn-danger:hover {
+  background: #ba2121;
+}
+
+/* Remove shadows */
+.toast,
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none;
+}
+
+/* Messages */
+.toast {
+  border: none;
+}
+
+.toast-header {
+  background: none;
+  border: none;
+}
+
+.toast-success { background: #dfd; }
+.toast-warning { background: #ffc; }
+.toast-error { background: #ffefef; }
+.toast-info { background: #f8f8f8; }
