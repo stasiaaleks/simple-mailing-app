@@ -2,7 +2,7 @@
 
 A Node.js + MongoDB mailing list application with a web interface for managing contacts and sending bulk emails.
 
-## Tooling
+## Stack
 
 - **Backend**: Node.js + Express.js
 - **Database**: MongoDB (Docker)
