@@ -1,0 +1,17 @@
+[
+  {
+    "key": "welcome",
+    "subject": "Welcome to our service",
+    "body": "<h1>Welcome</h1><p>Thank you for joining us. We are glad to have you onboard.</p>"
+  },
+  {
+    "key": "announcement",
+    "subject": "Important Announcement",
+    "body": "<h1>Announcement</h1><p>We have an important update to share with you. Please read carefully.</p>"
+  },
+  {
+    "key": "newsletter",
+    "subject": "Monthly Newsletter",
+    "body": "<h1>Newsletter</h1><p>Check out this month's highlights and updates from our team.</p>"
+  }
+]
