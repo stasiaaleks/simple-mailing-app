@@ -58,6 +58,10 @@ class ApiClient {
     return await this.request('GET', API_ENDPOINTS.TEMPLATES.LIST);
   }
 
+  async getEmails() {
+    return await this.request('GET', API_ENDPOINTS.EMAIL.LIST);
+  }
+
   async sendEmail(subject, body, recipientIds) {
     return await this.request('POST', API_ENDPOINTS.EMAIL.SEND, {
       subject,

@@ -10,6 +10,7 @@ const API_ENDPOINTS = {
     LIST: '/api/templates'
   },
   EMAIL: {
+    LIST: '/api/emails',
     SEND: '/api/email/send'
   }
 };
@@ -30,6 +31,7 @@ const UI_MESSAGES = {
     NO_MESSAGE: 'Please select a template or enter a message',
     LOAD_CONTACTS: 'Failed to load contacts',
     LOAD_TEMPLATES: 'Failed to load templates',
+    LOAD_EMAILS: 'Failed to load sent emails',
     DEFAULT: 'An error occurred'
   }
 };

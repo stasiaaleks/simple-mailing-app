@@ -1,17 +1,17 @@
 [
   {
-    "key": "welcome",
-    "subject": "Welcome to our service",
-    "body": "<h1>Welcome</h1><p>Thank you for joining us. We are glad to have you onboard.</p>"
+    "key": "semester-start",
+    "subject": "New semester starts at NaUKMA",
+    "body": "<p>Welcome to Kyiv-Mohyla Academy - please check the schedule again soon.</p>"
   },
   {
-    "key": "announcement",
-    "subject": "Important Announcement",
-    "body": "<h1>Announcement</h1><p>We have an important update to share with you. Please read carefully.</p>"
+    "key": "event-announcement",
+    "subject": "Upcoming KYT concert at NaUKMA",
+    "body": "<p>Join us on campus - KYT concert is coming soon!</p>"
   },
   {
-    "key": "newsletter",
-    "subject": "Monthly Newsletter",
-    "body": "<h1>Newsletter</h1><p>Check out this month's highlights and updates from our team.</p>"
+    "key": "rateukma",
+    "subject": "Choose your courses with RateUKMA",
+    "body": "<p>Before picking electives, read and share course reviews on <a href=\"https://rateukma.com/\">RateUKMA</a>.</p>"
   }
 ]

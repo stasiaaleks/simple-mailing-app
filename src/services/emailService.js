@@ -1,5 +1,6 @@
 const ContactService = require('./contactService');
 const MailService = require('./mailService');
+const EmailRepository = require('../db/emailRepository');
 const CONFIG = require('../constants/config');
 const HttpError = require('../errors/httpError');
 
@@ -7,6 +8,7 @@ class EmailService {
   constructor() {
     this.contactService = new ContactService();
     this.mailService = new MailService();
+    this.repository = new EmailRepository();
   }
 
   async send({ subject, body, recipientIds }) {
@@ -14,8 +16,22 @@ class EmailService {
 
     const recipients = await this.contactService.getContactsByIds(recipientIds);
     const results = await this.mailService.sendToMultiple(recipients, subject, body);
+    const summary = this.summarize(results);
 
-    return this.summarize(results);
+    await this.save(subject, body, recipients, summary);
+    return summary;
+  }
+
+  async getSentEmails() {
+    return await this.repository.findAllNewestFirst();
+  }
+
+  async save(subject, body, recipients, { sent, failed, results }) {
+    const deliveries = results.map((result, i) => ({
+      contactId: recipients[i]._id,
+      ...result
+    }));
+    await this.repository.saveEmail(subject, body, deliveries, sent, failed);
   }
 
   validate(subject, body, recipientIds) {

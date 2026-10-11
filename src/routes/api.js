@@ -14,6 +14,7 @@ const routes = [
   ['put', '/contacts/:id', contactController, 'update'],
   ['delete', '/contacts/:id', contactController, 'delete'],
   ['get', '/templates', templateController, 'getAll'],
+  ['get', '/emails', emailController, 'getAll'],
   ['post', '/email/send', emailController, 'send'],
 ];
 

@@ -5,7 +5,8 @@ const CONFIG = {
   MONGODB_URI: process.env.MONGODB_URI,
   COLLECTIONS: {
     CONTACTS: 'contacts',
-    TEMPLATES: 'templates'
+    TEMPLATES: 'templates',
+    EMAILS: 'emails'
   },
 
   SMTP: {
