@@ -1,5 +1,6 @@
 const TemplateRepository = require('../db/templateRepository');
 const CONFIG = require('../constants/config');
+const HttpError = require('../errors/httpError');
 const fs = require('fs');
 const path = require('path');
 
@@ -42,7 +43,7 @@ class TemplateService {
   async getTemplateByKey(key) {
     const template = await this.repository.findByKey(key);
     if (!template) {
-      throw new Error(CONFIG.ERRORS.TEMPLATE_NOT_FOUND);
+      throw HttpError.notFound(CONFIG.ERRORS.TEMPLATE_NOT_FOUND);
     }
     return template;
   }

@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb');
-const { getDB } = require('../config/database');
+const { getDB } = require('./config');
 const CONFIG = require('../constants/config');
 
 class Repository {

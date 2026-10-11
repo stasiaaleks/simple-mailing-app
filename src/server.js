@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const CONFIG = require('./constants/config');
-const { connectDB } = require('./config/database');
+const { connectDB } = require('./db/config');
 const apiRoutes = require('./routes/api');
 const errorHandler = require('./middleware/errorHandler');
 

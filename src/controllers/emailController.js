@@ -5,13 +5,8 @@ class EmailController {
     this.service = new EmailService();
   }
 
-  async send(req, res, next) {
-    try {
-      const result = await this.service.send(req.body);
-      res.json(result);
-    } catch (error) {
-      next(error);
-    }
+  async send(req, res) {
+    res.json(await this.service.send(req.body));
   }
 }
 

@@ -5,13 +5,8 @@ class TemplateController {
     this.service = new TemplateService();
   }
 
-  async getAll(req, res, next) {
-    try {
-      const templates = await this.service.getAllTemplates();
-      res.json(templates);
-    } catch (error) {
-      next(error);
-    }
+  async getAll(req, res) {
+    res.json(await this.service.getAllTemplates());
   }
 }
 

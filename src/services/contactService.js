@@ -1,5 +1,6 @@
 const ContactRepository = require('../db/contactRepository');
 const CONFIG = require('../constants/config');
+const HttpError = require('../errors/httpError');
 
 class ContactService {
   constructor() {
@@ -8,11 +9,11 @@ class ContactService {
 
   validate(surname, firstName, patronymic, email) {
     if (!surname || !firstName || !email) {
-      throw new Error(CONFIG.ERRORS.REQUIRED_FIELDS);
+      throw HttpError.badRequest(CONFIG.ERRORS.REQUIRED_FIELDS);
     }
 
     if (!CONFIG.VALIDATION.EMAIL_REGEX.test(email)) {
-      throw new Error(CONFIG.ERRORS.INVALID_EMAIL);
+      throw HttpError.badRequest(CONFIG.ERRORS.INVALID_EMAIL);
     }
 
     return true;
@@ -25,7 +26,7 @@ class ContactService {
   async getContactById(id) {
     const contact = await this.repository.findById(id);
     if (!contact) {
-      throw new Error(CONFIG.ERRORS.CONTACT_NOT_FOUND);
+      throw HttpError.notFound(CONFIG.ERRORS.CONTACT_NOT_FOUND);
     }
     return contact;
   }
@@ -35,7 +36,7 @@ class ContactService {
 
     const existing = await this.repository.findByEmail(email);
     if (existing) {
-      throw new Error(CONFIG.ERRORS.EMAIL_EXISTS);
+      throw HttpError.badRequest(CONFIG.ERRORS.EMAIL_EXISTS);
     }
 
     return await this.repository.createContact(surname, firstName, patronymic, email);
@@ -49,7 +50,7 @@ class ContactService {
     if (email !== contact.email) {
       const existing = await this.repository.findByEmail(email);
       if (existing) {
-        throw new Error(CONFIG.ERRORS.EMAIL_EXISTS);
+        throw HttpError.badRequest(CONFIG.ERRORS.EMAIL_EXISTS);
       }
     }
 

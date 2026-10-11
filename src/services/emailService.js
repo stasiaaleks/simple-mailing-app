@@ -1,6 +1,7 @@
 const ContactService = require('./contactService');
 const MailService = require('./mailService');
 const CONFIG = require('../constants/config');
+const HttpError = require('../errors/httpError');
 
 class EmailService {
   constructor() {
@@ -19,13 +20,13 @@ class EmailService {
 
   validate(subject, body, recipientIds) {
     if (!Array.isArray(recipientIds) || recipientIds.length < CONFIG.VALIDATION.MIN_RECIPIENTS) {
-      throw this.badRequest(CONFIG.ERRORS.NO_RECIPIENTS);
+      throw HttpError.badRequest(CONFIG.ERRORS.NO_RECIPIENTS);
     }
     if (!subject) {
-      throw this.badRequest(CONFIG.ERRORS.NO_SUBJECT);
+      throw HttpError.badRequest(CONFIG.ERRORS.NO_SUBJECT);
     }
     if (!body) {
-      throw this.badRequest(CONFIG.ERRORS.NO_BODY);
+      throw HttpError.badRequest(CONFIG.ERRORS.NO_BODY);
     }
   }
 
@@ -35,12 +36,6 @@ class EmailService {
       failed: results.filter(r => !r.success).length,
       results
     };
-  }
-
-  badRequest(message) {
-    const error = new Error(message);
-    error.statusCode = CONFIG.HTTP_STATUS.BAD_REQUEST;
-    return error;
   }
 }
 
