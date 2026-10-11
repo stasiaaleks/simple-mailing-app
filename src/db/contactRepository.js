@@ -14,20 +14,18 @@ class ContactRepository extends Repository {
     return await this.findOne({ email });
   }
 
-  async createContact(surname, firstName, patronymic, email) {
+  async createContact(surname, firstName, email) {
     return await this.create({
       surname,
       firstName,
-      patronymic,
       email
     });
   }
 
-  async updateContact(id, surname, firstName, patronymic, email) {
+  async updateContact(id, surname, firstName, email) {
     return await this.update(id, {
       surname,
       firstName,
-      patronymic,
       email
     });
   }

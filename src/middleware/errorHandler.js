@@ -1,3 +1,6 @@
+// Express's built-in error handler replies with an HTML page
+// Frontend expects JSON like { error: "Invalid email format" } so it can show the message
+
 const errorHandler = (err, req, res, next) => {
   console.error('Error:', err.message);
 

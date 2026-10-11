@@ -11,16 +11,22 @@ function renderContactsList(contacts) {
     return;
   }
 
-  contactsList.innerHTML = contacts.map(contact => `
-    <tr>
-      <td>${escapeHtml(contact.surname)} ${escapeHtml(contact.firstName)} ${escapeHtml(contact.patronymic)}</td>
-      <td>${escapeHtml(contact.email)}</td>
-      <td class="text-end text-nowrap">
-        <button class="btn btn-sm btn-secondary edit-btn" data-id="${contact._id}">Change</button>
-        <button class="btn btn-sm btn-danger delete-btn" data-id="${contact._id}">Delete</button>
-      </td>
-    </tr>
-  `).join('');
+  contactsList.innerHTML = contacts.map(contact => {
+    const surname = escapeHtml(contact.surname);
+    const firstName = escapeHtml(contact.firstName);
+    const email = escapeHtml(contact.email);
+
+    return `
+      <tr>
+        <td>${surname} ${firstName}</td>
+        <td>${email}</td>
+        <td class="text-end text-nowrap">
+          <button class="btn btn-sm btn-secondary edit-btn" data-id="${contact._id}">Change</button>
+          <button class="btn btn-sm btn-danger delete-btn" data-id="${contact._id}">Delete</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
 }
 
 async function loadContacts() {
@@ -39,7 +45,6 @@ function openEditModal(contactId) {
   editForm.elements.id.value = contact._id;
   editForm.elements.surname.value = contact.surname;
   editForm.elements.firstName.value = contact.firstName;
-  editForm.elements.patronymic.value = contact.patronymic || '';
   editForm.elements.email.value = contact.email;
 
   bootstrap.Modal.getOrCreateInstance(editModal).show();
@@ -59,10 +64,10 @@ async function deleteContact(contactId) {
 
 async function onAddContact(e) {
   e.preventDefault();
-  const { surname, firstName, patronymic, email } = addForm.elements;
+  const { surname, firstName, email } = addForm.elements;
 
   try {
-    await api.createContact(surname.value, firstName.value, patronymic.value, email.value);
+    await api.createContact(surname.value, firstName.value, email.value);
     showToast('Success', UI_MESSAGES.SUCCESS.CONTACT_ADDED, TOAST_TYPES.SUCCESS);
     addForm.reset();
     loadContacts();
@@ -73,10 +78,10 @@ async function onAddContact(e) {
 
 async function onEditContact(e) {
   e.preventDefault();
-  const { id, surname, firstName, patronymic, email } = editForm.elements;
+  const { id, surname, firstName, email } = editForm.elements;
 
   try {
-    await api.updateContact(id.value, surname.value, firstName.value, patronymic.value, email.value);
+    await api.updateContact(id.value, surname.value, firstName.value, email.value);
     showToast('Success', UI_MESSAGES.SUCCESS.CONTACT_UPDATED, TOAST_TYPES.SUCCESS);
     bootstrap.Modal.getInstance(editModal).hide();
     loadContacts();

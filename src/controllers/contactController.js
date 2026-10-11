@@ -15,14 +15,14 @@ class ContactController {
   }
 
   async create(req, res) {
-    const { surname, firstName, patronymic, email } = req.body;
-    const contact = await this.service.addContact(surname, firstName, patronymic, email);
+    const { surname, firstName, email } = req.body;
+    const contact = await this.service.addContact(surname, firstName, email);
     res.status(CONFIG.HTTP_STATUS.CREATED).json(contact);
   }
 
   async update(req, res) {
-    const { surname, firstName, patronymic, email } = req.body;
-    const contact = await this.service.updateContact(req.params.id, surname, firstName, patronymic, email);
+    const { surname, firstName, email } = req.body;
+    const contact = await this.service.updateContact(req.params.id, surname, firstName, email);
     res.json(contact);
   }
 

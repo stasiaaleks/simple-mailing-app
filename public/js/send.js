@@ -15,7 +15,7 @@ function updateSelectedCount() {
 
 function renderContactsTable(contacts) {
   if (contacts.length === 0) {
-    contactsTable.innerHTML = '<tr><td colspan="5" class="text-center">No contacts found</td></tr>';
+    contactsTable.innerHTML = '<tr><td colspan="4" class="text-center">No contacts found</td></tr>';
     return;
   }
 
@@ -27,7 +27,6 @@ function renderContactsTable(contacts) {
       </td>
       <td>${escapeHtml(contact.surname)}</td>
       <td>${escapeHtml(contact.firstName)}</td>
-      <td>${escapeHtml(contact.patronymic)}</td>
       <td>${escapeHtml(contact.email)}</td>
     </tr>
   `).join('');
@@ -79,46 +78,60 @@ function onTemplateChange() {
   emailForm.elements.body.value = template ? template.body : '';
 }
 
+function getMessage() {
+  return {
+    subject: emailForm.elements.subject.value.trim(),
+    body: emailForm.elements.body.value.trim()
+  };
+}
+
+function validateMessage({ subject, body }) {
+  if (selectedContacts.size === 0) return UI_MESSAGES.ERROR.NO_RECIPIENTS;
+  if (!subject) return UI_MESSAGES.ERROR.NO_SUBJECT;
+  if (!body) return UI_MESSAGES.ERROR.NO_MESSAGE;
+  return null;
+}
+
+function setSending(isSending) {
+  const sendButton = emailForm.querySelector('button[type="submit"]');
+  sendButton.disabled = isSending;
+  sendButton.textContent = isSending ? 'Sending...' : 'Send email';
+}
+
+function clearSelection() {
+  selectedContacts.clear();
+  selectAllCheckbox.checked = false;
+  renderContactsTable(allContacts);
+  updateSelectedCount();
+}
+
+function showSendResult({ sent, failed }) {
+  if (failed > 0) {
+    showToast('Warning', UI_MESSAGES.WARNING.EMAIL_PARTIAL(sent, failed), TOAST_TYPES.WARNING);
+    return;
+  }
+  showToast('Success', UI_MESSAGES.SUCCESS.EMAIL_SENT(sent), TOAST_TYPES.SUCCESS);
+  clearSelection();
+}
+
 async function onSendEmail(e) {
   e.preventDefault();
 
-  if (selectedContacts.size === 0) {
-    showToast('Error', UI_MESSAGES.ERROR.NO_RECIPIENTS, TOAST_TYPES.ERROR);
+  const message = getMessage();
+  const error = validateMessage(message);
+  if (error) {
+    showToast('Error', error, TOAST_TYPES.ERROR);
     return;
   }
 
-  const subject = emailForm.elements.subject.value.trim();
-  const body = emailForm.elements.body.value.trim();
-
-  if (!subject) {
-    showToast('Error', UI_MESSAGES.ERROR.NO_SUBJECT, TOAST_TYPES.ERROR);
-    return;
-  }
-  if (!body) {
-    showToast('Error', UI_MESSAGES.ERROR.NO_MESSAGE, TOAST_TYPES.ERROR);
-    return;
-  }
-
-  const sendButton = emailForm.querySelector('button[type="submit"]');
-  sendButton.disabled = true;
-  sendButton.textContent = 'Sending...';
-
+  setSending(true);
   try {
-    const result = await api.sendEmail(subject, body, [...selectedContacts]);
-    if (result.failed > 0) {
-      showToast('Warning', UI_MESSAGES.WARNING.EMAIL_PARTIAL(result.sent, result.failed), TOAST_TYPES.WARNING);
-      return;
-    }
-    showToast('Success', UI_MESSAGES.SUCCESS.EMAIL_SENT(result.sent), TOAST_TYPES.SUCCESS);
-    selectedContacts.clear();
-    selectAllCheckbox.checked = false;
-    renderContactsTable(allContacts);
-    updateSelectedCount();
+    const result = await api.sendEmail(message.subject, message.body, [...selectedContacts]);
+    showSendResult(result);
   } catch (error) {
     showToast('Error', error.message, TOAST_TYPES.ERROR);
   } finally {
-    sendButton.disabled = false;
-    sendButton.textContent = 'Send email';
+    setSending(false);
   }
 }
 

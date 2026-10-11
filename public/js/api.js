@@ -34,20 +34,18 @@ class ApiClient {
     return await this.request('GET', API_ENDPOINTS.CONTACTS.GET(id));
   }
 
-  async createContact(surname, firstName, patronymic, email) {
+  async createContact(surname, firstName, email) {
     return await this.request('POST', API_ENDPOINTS.CONTACTS.CREATE, {
       surname,
       firstName,
-      patronymic,
       email
     });
   }
 
-  async updateContact(id, surname, firstName, patronymic, email) {
+  async updateContact(id, surname, firstName, email) {
     return await this.request('PUT', API_ENDPOINTS.CONTACTS.UPDATE(id), {
       surname,
       firstName,
-      patronymic,
       email
     });
   }

@@ -7,7 +7,7 @@ class ContactService {
     this.repository = new ContactRepository();
   }
 
-  validate(surname, firstName, patronymic, email) {
+  validate(surname, firstName, email) {
     if (!surname || !firstName || !email) {
       throw HttpError.badRequest(CONFIG.ERRORS.REQUIRED_FIELDS);
     }
@@ -31,19 +31,19 @@ class ContactService {
     return contact;
   }
 
-  async addContact(surname, firstName, patronymic, email) {
-    this.validate(surname, firstName, patronymic, email);
+  async addContact(surname, firstName, email) {
+    this.validate(surname, firstName, email);
 
     const existing = await this.repository.findByEmail(email);
     if (existing) {
       throw HttpError.badRequest(CONFIG.ERRORS.EMAIL_EXISTS);
     }
 
-    return await this.repository.createContact(surname, firstName, patronymic, email);
+    return await this.repository.createContact(surname, firstName, email);
   }
 
-  async updateContact(id, surname, firstName, patronymic, email) {
-    this.validate(surname, firstName, patronymic, email);
+  async updateContact(id, surname, firstName, email) {
+    this.validate(surname, firstName, email);
 
     const contact = await this.getContactById(id);
 
@@ -54,7 +54,7 @@ class ContactService {
       }
     }
 
-    return await this.repository.updateContact(id, surname, firstName, patronymic, email);
+    return await this.repository.updateContact(id, surname, firstName, email);
   }
 
   async deleteContact(id) {
