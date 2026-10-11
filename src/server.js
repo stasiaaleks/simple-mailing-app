@@ -6,6 +6,7 @@ const CONFIG = require('./constants/config');
 const { connectDB } = require('./db/config');
 const apiRoutes = require('./routes/api');
 const errorHandler = require('./middleware/errorHandler');
+const TemplateService = require('./services/templateService');
 
 const app = express();
 const PORT = CONFIG.PORT;
@@ -27,6 +28,8 @@ app.use(errorHandler);
 const start = async () => {
   try {
     await connectDB();
+    const templateCount = await new TemplateService().loadDefaultTemplates();
+    console.log(`Loaded ${templateCount} email templates`);
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
